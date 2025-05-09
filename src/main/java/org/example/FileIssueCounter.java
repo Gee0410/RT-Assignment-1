@@ -37,7 +37,17 @@ public class FileIssueCounter {
             }
         }
         scanner.close();
-        scanDirectory(directory);
+
+        File finalDirectory = directory;
+        Thread scanThread = new Thread(() -> scanDirectory(finalDirectory));
+        System.out.println("Scanning Java files...");
+        scanThread.start();
+
+        try {
+            scanThread.join();
+        } catch (InterruptedException e) {
+            System.out.println("Scanning was interrupted.");
+        }
 
         System.out.println("\nSummary:");
         if (javaFileCount == 0) {
@@ -102,3 +112,4 @@ public class FileIssueCounter {
         }
     }
 }
+git add .
