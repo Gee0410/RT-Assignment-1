@@ -112,4 +112,4 @@ public class FileIssueCounter {
         }
     }
 }
-git add .
+
